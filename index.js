@@ -191,6 +191,7 @@ async function clickSwitchChain(chainid) {
   if (!web3ext) return
 
   showAlert("web3infobox", "alert-primary", "swithing chain in progress");
+  document.getElementById("btnswithchain01").disabled = true;
   document.getElementById("btnswithchain38").disabled = true;
   document.getElementById("btnswithchain08").disabled = true;
 
@@ -204,6 +205,7 @@ async function clickSwitchChain(chainid) {
     .catch((err) => {
       console.error(err);
       showAlert("web3infobox", "alert-danger", err.message);
+      document.getElementById("btnswithchain01").disabled = false;
       document.getElementById("btnswithchain38").disabled = false;
       document.getElementById("btnswithchain08").disabled = false;
       updateUI()
@@ -277,6 +279,7 @@ function onSuccessfulSwithChain() {
   showAlert("web3infobox", "alert-primary", "chain switched");
   document.getElementById("btnswithchain38").disabled = false;
   document.getElementById("btnswithchain08").disabled = false;
+  document.getElementById("btnswithchain01").disabled = false;
   updateUI()
 }
 
