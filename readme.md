@@ -35,6 +35,8 @@ For a good description of the provider apis, I recommend [Ethereum Provider API]
 
 For a good list of supported EVM compatible chains that can be added on metamak see [chainlist on defillama](https://github.com/DefiLlama/chainlist) or https://chainlist.wtf/ that seem to be used by metamask to make consistent check.
 
+One usefull crypto/token logo database: https://cryptologos.cc
+
 ## Some references
 
 - [Metamask Doc](https://docs.metamask.io/guide/)

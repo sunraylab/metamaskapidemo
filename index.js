@@ -211,10 +211,49 @@ async function clickSwitchChain(chainid) {
 
 }
 
+document.querySelector('#btnwatchasset').addEventListener('click', clickWatchAsset);
+async function clickWatchAsset() {
+  await metamask();
+  if (!web3ext) return
+
+  showAlert("web3infobox", "alert-primary", "successful watch asset in progress");
+  document.getElementById("btnwatchasset").disabled = true;
+
+  const params = {
+      type: 'ERC20', // The asset's interface, e.g. 'ERC20'
+      options: {
+        address: '0x514910771af9ca656af840dff83e8264ecf986ca', // The hexadecimal Ethereum address of the token contract
+        symbol: 'LINK', // A ticker symbol or shorthand, up to 5 alphanumerical characters
+        decimals: 18, // The number of asset decimals
+        image: "https://cryptologos.cc/logos/chainlink-link-logo.png", // A string url of the token logo
+      },
+    };
+
+  // onSuccessfulWatchAsset is call immediatly whatever the token has been assed or not as long metamask is reachable and the request is valid
+  // the token is added to the current selected chain in metamak, nothing prevent than adding a token with a smartcontract address which is not on the right chain!
+  web3ext
+    .request({ method: 'wallet_watchAsset', params})
+    .then(onSuccessfulWatchAsset)
+    .catch((err) => {
+      console.error(err);
+      showAlert("web3infobox", "alert-danger", err.message);
+      document.getElementById("btnwatchasset").disabled = false;
+      updateUI()
+    });
+
+}
 
 /**************************************
 * Event Handlers
 */
+
+function onSuccessfulWatchAsset(data) {
+  console.log("successful watch asset");
+  console.log(data);
+  showAlert("web3infobox", "alert-primary", "successful watch asset");
+  document.getElementById("btnwatchasset").disabled = false;
+  updateUI()
+}
 
 function onSuccessfulRequestAccounts(accounts) {
   console.log("request accounts");
