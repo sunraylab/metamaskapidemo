@@ -29,6 +29,14 @@ Simply run liverserver.
 
 In January of 2021, Metamask made a number of breaking changes to their API and removed the injected window.web3.
 
+metamask APIs works also the same way with the Brave wallet.
+
+For a good description of the provider apis, I recommend [Ethereum Provider API](https://github.com/brave/brave-browser/wiki/Ethereum-Provider-API) at brave repo
+
+For a good list of supported EVM compatible chains that can be added on metamak see [chainlist on defillama](https://github.com/DefiLlama/chainlist) or https://chainlist.wtf/ that seem to be used by metamask to make consistent check.
+
+## Some references
+
 - [Metamask Doc](https://docs.metamask.io/guide/)
 - [EIP-1193: Ethereum Provider JavaScript API](https://eips.ethereum.org/EIPS/eip-1193)
 - [live-server configuration](https://github.com/ritwickdey/vscode-live-server/blob/HEAD/docs/settings.md)

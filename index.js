@@ -71,8 +71,10 @@ async function queryMetamaskStatus() {
 *   clickCheckMetamaskStatus
 *   clickCheckConnection
 *   clickRequestAccounts
+*   clickAddChain
 */
 
+document.querySelector('#btncheckmetakaskstatus').addEventListener('click', clickCheckMetamaskStatus);
 async function clickCheckMetamaskStatus() {
   showAlert("web3infobox", "alert-primary", "checking metamask status");
   let ms = await queryMetamaskStatus()
@@ -80,11 +82,13 @@ async function clickCheckMetamaskStatus() {
   updateUI();
 }
 
+document.querySelector('#btnisconnected').addEventListener('click', clickCheckConnection);
 async function clickCheckConnection() {
   await metamask();
   updateUI();
 }
 
+document.querySelector('#btnrequestaccounts').addEventListener('click', clickRequestAccounts);
 async function clickRequestAccounts() {
   await metamask();
   if (!web3ext) return
@@ -124,7 +128,7 @@ async function clickRequestAccounts() {
       showAlert("web3infobox", "alert-danger", "user rejected web3 permission request");
     } else {
       console.error(error);
-      showAlert("web3infobox", "alert-danger", "error requesting permissions<br />" + error);
+      showAlert("web3infobox", "alert-danger", "error requesting permissions<br />" + error.message);
     }
     gaccounts = undefined;
     gchainid = undefined;
@@ -133,6 +137,51 @@ async function clickRequestAccounts() {
     updateUI();
   });
 }
+
+// for the purpose of the demo AddChain will requesting addin binance chain
+// for a good list of supported EVM compatible chains that can be added on metamak see https://github.com/DefiLlama/chainlist
+document.querySelector('#btnaddchain').addEventListener('click', clickAddChain);
+async function clickAddChain() {
+  await metamask();
+  if (!web3ext) return
+
+  showAlert("web3infobox", "alert-primary", "adding new chain in progress");
+  document.getElementById("btnaddchain").disabled = true;
+
+  // warning: metamask check that chain info are consistent in regards of their file (https://chainlist.wtf/) 
+  // user receives a warning if discrepencies found, for example the token symbol with the 
+  const params = [
+    {
+      chainId: '0x38', // 56 in base 10
+      blockExplorerUrls: ['https://bscscan.com'],
+      chainName: 'Binance Smart Chain Mainnet',
+      iconUrls: ['https://defillama.com/chain-icons/rsz_binance.jpg'],
+      nativeCurrency: {
+        name: 'Binance Smart Chain',
+        symbol: 'BNB',
+        decimals: 18,
+      },
+      rpcUrls: ['https://bsc-dataseed4.binance.org'],
+    },
+  ];
+
+  // if the chain is not in metamask, then open metamask and ask (1) to add the chain, (2) to switch to the chain
+  // if the chain is already in metamask but not selected, then open metamask and ask to switch to the chain
+  // if the chain is already selected, then call onSuccessfulAddChain without UI interactions
+  // a success trigger the chainChanged event
+  web3ext
+    .request({ method: 'wallet_addEthereumChain', params})
+    .then(onSuccessfulAddChain)
+    .catch((err) => {
+      console.error(err);
+      showAlert("web3infobox", "alert-danger", err.message);
+      // clean button state and refresh UI
+      document.getElementById("btnaddchain").disabled = false;
+      updateUI()
+    });
+
+}
+
 
 /**************************************
 * Event Handlers
@@ -145,6 +194,15 @@ function onSuccessfulRequestAccounts(accounts) {
   showAlert("web3infobox", "alert-primary", "requested web3 accounts: " + accounts.length);
   // clean button state and refresh UI
   document.getElementById("btnrequestaccounts").disabled = false;
+  updateUI()
+}
+
+function onSuccessfulAddChain(data) {
+  console.log("chain added");
+  console.log(data);
+  showAlert("web3infobox", "alert-primary", "chain added");
+  // clean button state and refresh UI
+  document.getElementById("btnaddchain").disabled = false;
   updateUI()
 }
 
@@ -234,13 +292,6 @@ function updateUI() {
     document.getElementById("web3infobox_chain").innerHTML = "no chain information"
   }
 }
-
-/**************************************
-* Add event listener for buttons
-*/
-document.querySelector('#btncheckmetakaskstatus').addEventListener('click', clickCheckMetamaskStatus);
-document.querySelector('#btnisconnected').addEventListener('click', clickCheckConnection);
-document.querySelector('#btnrequestaccounts').addEventListener('click', clickRequestAccounts);
 
 // connect event is raised during ethereum injection at page load
 // so the only way to capture this first fired event is here, at page load
