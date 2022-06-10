@@ -33,7 +33,9 @@ metamask APIs works also the same way with the Brave wallet.
 
 For a good description of the provider apis, I recommend [Ethereum Provider API](https://github.com/brave/brave-browser/wiki/Ethereum-Provider-API) at brave repo
 
-For a good list of supported EVM compatible chains that can be added on metamak see [chainlist on defillama](https://github.com/DefiLlama/chainlist) or https://chainlist.wtf/ that seem to be used by metamask to make consistent check.
+For a good list of supported EVM compatible chains that can be added on metamak see [chainlist on defillama](https://chainlist.org) (sources here https://github.com/DefiLlama/chainlist) or https://chainlist.wtf/ that seem to be used by metamask to make consistent check.
+
+Another list of networkchain is available on [chainid.network](https://chainid.network/chains.json) in a json format. chainid.network is redicted to chainlist.org.
 
 One usefull crypto/token logo database: https://cryptologos.cc
 
