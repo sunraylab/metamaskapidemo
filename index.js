@@ -169,8 +169,43 @@ async function clickAddChain() {
     .catch((err) => {
       console.error(err);
       showAlert("web3infobox", "alert-danger", err.message);
-      // clean button state and refresh UI
       document.getElementById("btnaddchain").disabled = false;
+      updateUI()
+    });
+}
+
+document.querySelector('#btnswithchain01').addEventListener('click', clickSwitchChain01);
+document.querySelector('#btnswithchain38').addEventListener('click', clickSwitchChain38);
+document.querySelector('#btnswithchain08').addEventListener('click', clickSwitchChain08);
+async function clickSwitchChain01() {
+  await clickSwitchChain('0x1')
+}
+async function clickSwitchChain38() {
+  await clickSwitchChain('0x38')
+}
+async function clickSwitchChain08() {
+  await clickSwitchChain('0x8')
+}
+async function clickSwitchChain(chainid) {
+  await metamask();
+  if (!web3ext) return
+
+  showAlert("web3infobox", "alert-primary", "swithing chain in progress");
+  document.getElementById("btnswithchain38").disabled = true;
+  document.getElementById("btnswithchain08").disabled = true;
+
+  // if the chain is not in metamask, then return an error "Unrecognized chain ID "0x8". Try adding the chain using wallet_addEthereumChain first."
+  // if the chain is already in metamask but not selected, then open metamask and ask to switch to the chain
+  // if the chain is already selected, then call onSuccessfulSwitchChain without UI interactions
+  // a success trigger the chainChanged event
+  web3ext
+    .request({ method: 'wallet_switchEthereumChain', params: [{chainId:chainid,}], })
+    .then(onSuccessfulSwithChain)
+    .catch((err) => {
+      console.error(err);
+      showAlert("web3infobox", "alert-danger", err.message);
+      document.getElementById("btnswithchain38").disabled = false;
+      document.getElementById("btnswithchain08").disabled = false;
       updateUI()
     });
 
@@ -195,6 +230,14 @@ function onSuccessfulAddChain(data) {
   console.log(data);
   showAlert("web3infobox", "alert-primary", "chain added");
   document.getElementById("btnaddchain").disabled = false;
+  updateUI()
+}
+
+function onSuccessfulSwithChain() {
+  console.log("chain switched");
+  showAlert("web3infobox", "alert-primary", "chain switched");
+  document.getElementById("btnswithchain38").disabled = false;
+  document.getElementById("btnswithchain08").disabled = false;
   updateUI()
 }
 
