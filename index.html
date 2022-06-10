@@ -1,55 +1,63 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Metamask API demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
+
 <body class="d-flex flex-column min-vh-100 bg-light">
     <div class="container">
         <h1>Metamask API demo</h1>
-        <p>see <a href="https://github.com/sunraylab/metamaskapidemo">readme on github</a> for explainations.</p> 
+        <p>see <a href="https://github.com/sunraylab/metamaskapidemo">readme on github</a> for explainations.</p>
 
         <!-- buttons -->
         <section class="mt-5">
-            <button id="btncheckmetakaskstatus" type="button" class="btn btn-primary m-1">Check Metamask Extension Status</button>
+            <button id="btncheckmetakaskstatus" type="button" class="btn btn-primary m-1">Check Metamask Extension
+                Status</button>
             <button id="btnisconnected" type="button" class="btn btn-primary m-1">Check web3 connection</button>
-            <button id="btnrequestaccounts" type="button" class="btn btn-primary m-1" >Request Accounts</button>
-            <button id="btnaddchain" type="button" class="btn btn-primary m-1" >Add Chain 0x38 (BSC)</button>
-            <button id="btnswithchain01" type="button" class="btn btn-primary m-1" >Swith Chain 0x1 (ETH)</button>
-            <button id="btnswithchain38" type="button" class="btn btn-primary m-1" >Swith Chain 0x38 (BSC)</button>
-            <button id="btnswithchain08" type="button" class="btn btn-primary m-1" >Swith Chain 0x8 (UBQ)</button>
-            <button id="btnwatchasset" type="button" class="btn btn-primary m-1" >Watch Asset (ERC20 LINK)</button>
+            <button id="btnrequestaccounts" type="button" class="btn btn-primary m-1">Request Accounts</button>
+            <button id="btnaddchain" type="button" class="btn btn-primary m-1">Add Chain 0x38 (BSC)</button>
+            <button id="btnswithchain01" type="button" class="btn btn-primary m-1">Swith Chain 0x1 (ETH)</button>
+            <button id="btnswithchain38" type="button" class="btn btn-primary m-1">Swith Chain 0x38 (BSC)</button>
+            <button id="btnswithchain08" type="button" class="btn btn-primary m-1">Swith Chain 0x8 (UBQ)</button>
+            <button id="btnwatchasset" type="button" class="btn btn-primary m-1">Watch Asset (ERC20 LINK)</button>
         </section>
 
         <!-- Connect -->
         <hr>
         <div id="web3infobox" class="alert alert-dismissible alert-primary my-3 collapse">
             <span id="web3infoboxmsg"></span>
-            <button type="button" class="btn-close" data-bs-toggle="collapse" data-bs-target="#web3infobox" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-toggle="collapse" data-bs-target="#web3infobox"
+                aria-label="Close"></button>
         </div>
         <div id="detectedbrowser"></div>
         <div id="web3infobox_connected" class="my-2"></div>
         <div id="web3infobox_accounts" class="my-2"></div>
         <div id="web3infobox_chain" class="my-2"></div>
-    <div id="accounts"></div>
+        <div id="accounts"></div>
     </div>
-    
+
     <!-- footer -->
     <footer class="mt-auto py-2 bg-secondary text-light">
         <div class="text-center">
-          <p class="tiny mb-0">
-          &copy;2022&nbsp;
-          <a class="link-light" href="https://sunraylab.net">Sunraylab</a>
-          </p>
+            <p class="tiny mb-0">
+                &copy;2022&nbsp;
+                <a class="link-light" href="https://sunraylab.net">Sunraylab</a>
+            </p>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js" type="module"></script>
-    <script src="detectbrowser.js" charset="utf-8" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@metamask/detect-provider@1.2.0/dist/detect-provider.min.js" type="module"></script>
+    <!--script src="detectbrowser.js" charset="utf-8" type="module"></script-->
     <script src="index.js" charset="utf-8" type="module"></script>
 </body>
+
 </html>
