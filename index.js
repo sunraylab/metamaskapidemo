@@ -115,24 +115,18 @@ async function clickRequestAccounts() {
         .then(onSuccessfulRequestAccounts)
         .catch((err) => {
           console.error(err);
-          // clean button state and refresh UI
+          showAlert("web3infobox", "alert-danger", "error requesting accounts<br />" + err.message);
           document.getElementById("btnrequestaccounts").disabled = false;
           updateUI()
         });
     }
   })
-  .catch((error) => {
-    if (error.code === 4001) {
-      // EIP-1193 userRejectedRequest error
-      console.log('user rejected web3 permission request');
-      showAlert("web3infobox", "alert-danger", "user rejected web3 permission request");
-    } else {
-      console.error(error);
-      showAlert("web3infobox", "alert-danger", "error requesting permissions<br />" + error.message);
-    }
+  .catch((err) => {
     gaccounts = undefined;
     gchainid = undefined;
-    // clean button state and refresh UI
+
+    console.error(err);
+    showAlert("web3infobox", "alert-danger", "error requesting permissions<br />" + err.message);
     document.getElementById("btnrequestaccounts").disabled = false;
     updateUI();
   });
@@ -192,7 +186,6 @@ function onSuccessfulRequestAccounts(accounts) {
   gaccounts = accounts
   // gchainid = web3ext.chainId;
   showAlert("web3infobox", "alert-primary", "requested web3 accounts: " + accounts.length);
-  // clean button state and refresh UI
   document.getElementById("btnrequestaccounts").disabled = false;
   updateUI()
 }
@@ -201,7 +194,6 @@ function onSuccessfulAddChain(data) {
   console.log("chain added");
   console.log(data);
   showAlert("web3infobox", "alert-primary", "chain added");
-  // clean button state and refresh UI
   document.getElementById("btnaddchain").disabled = false;
   updateUI()
 }
@@ -294,7 +286,7 @@ function updateUI() {
 }
 
 // connect event is raised during ethereum injection at page load
-// so the only way to capture this first fired event is here, at page load
+// the only way to capture this first fired event is here, at page load
 if (window && window.ethereum) {
   window.ethereum.on('connect', onConnect);
   window.ethereum.on('accountsChanged', onAccountsChanged);
