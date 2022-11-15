@@ -1,6 +1,8 @@
-# Metamask API demo
+# Metamask API demo (javascript)
 
-Simple frontend page to demonstrate use of Metamask API
+Very Simple frontend page to demonstrate use of Metamask API, writtent with basic javascript.
+
+![snapshot](snapshot.png)
 
 Metamask extends browser with web3 wallet capabilities. Metamask storage is decentralized, only users have access to their keys on their browser.
 
@@ -27,11 +29,9 @@ Metamask offers some web3 APIs allowing web3 DApp to relay on it for interacting
 
 Simply run liverserver.
 
-In January of 2021, Metamask made a number of breaking changes to their API and removed the injected window.web3.
+metamask APIs works the same way with Chrome and Brave wallet.
 
-metamask APIs works also the same way with the Brave wallet.
-
-For a good description of the provider apis, I recommend [Ethereum Provider API](https://github.com/brave/brave-browser/wiki/Ethereum-Provider-API) at brave repo
+For a good description of the provider APIs I recommend [Ethereum Provider API](https://github.com/brave/brave-browser/wiki/Ethereum-Provider-API) at brave repo
 
 For a good list of supported EVM compatible chains that can be added on metamak see [chainlist on defillama](https://chainlist.org) (sources here https://github.com/DefiLlama/chainlist) or https://chainlist.wtf/ that seem to be used by metamask to make consistent check.
 
@@ -45,7 +45,7 @@ One usefull crypto/token logo database: https://cryptologos.cc
 - [EIP-1193: Ethereum Provider JavaScript API](https://eips.ethereum.org/EIPS/eip-1193)
 - [live-server configuration](https://github.com/ritwickdey/vscode-live-server/blob/HEAD/docs/settings.md)
 
-In January of 2021, Metamask made a number of breaking changes to their API and removed the injected window.web3.
+In January 2021 Metamask made a number of breaking changes to their API and removed the injected window.web3.
 
 ## Licence 
 
